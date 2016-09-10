@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            if(result != null || result != ""){
+            if(result != null){
                 // Retrieve current temperature
                 String target = "\"temp\":";
                 int idxOfCurrentTempStart = result.indexOf(target) + target.length();
@@ -68,10 +68,11 @@ public class MainActivity extends AppCompatActivity {
                 currTemp -= 273.15;
 
                 // Display the temperature in the view
-                weatherStatus.setText(Integer.toString((int)currTemp) + " " + (char) 0x00B0 + "C" );
+                String displayCurrTemp = String.format("%s %s%s", Integer.toString((int)currTemp),(char) 0x00B0, "C");
+                weatherStatus.setText(displayCurrTemp);
             }
             else{
-                weatherStatus.setText("Failed to retrieve the weather for Houston.");
+                weatherStatus.setText("Failed to retrieve the current weather for Houston.");
             }
         }
 
